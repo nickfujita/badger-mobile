@@ -16,7 +16,7 @@ import {
 import { Header } from "react-navigation";
 import BigNumber from "bignumber.js";
 
-import QRCodeScanner from "react-native-qrcode-scanner";
+import QRCodeScanner from "../atoms/QRCodeScanner";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import { T, H1, H2, Button, Spacer } from "../atoms";
@@ -459,19 +459,10 @@ const SendSetupScreen = ({
             <Spacer small />
             <View style={{ height: Dimensions.get("window").width - 12 }}>
               <QRCodeScanner
-                cameraProps={{ ratio: "1:1", captureAudio: false }}
-                fadeIn={false}
-                onRead={e => {
-                  const qrData = e.data;
-
+                onRead={qrData => {
                   const parsedData = parseQr(qrData);
                   handleAddressData(parsedData);
                   setQrOpen(false);
-                }}
-                cameraStyle={{
-                  // padding 16 for each side
-                  height: Dimensions.get("window").width - 32,
-                  width: Dimensions.get("window").width - 32
                 }}
               />
             </View>

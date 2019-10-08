@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import QRCodeScanner from "react-native-qrcode-scanner";
+import QRCodeScanner from "../atoms/QRCodeScanner";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import { getAddressSelector } from "../data/accounts/selectors";
@@ -91,19 +91,11 @@ const KeySweepScreen = ({ address }: Props) => {
             <Spacer small />
             <View style={{ height: Dimensions.get("window").width - 12 }}>
               <QRCodeScanner
-                cameraProps={{ ratio: "1:1", captureAudio: false }}
-                fadeIn={false}
-                onRead={e => {
-                  const qrData = e.data;
+                onRead={qrData => {
                   const parsedData = parseQr(qrData);
                   setSweepState("pending");
                   handleQRData(parsedData);
                   setCameraOpen(false);
-                }}
-                cameraStyle={{
-                  // padding 16 for each side
-                  height: Dimensions.get("window").width - 32,
-                  width: Dimensions.get("window").width - 32
                 }}
               />
             </View>
