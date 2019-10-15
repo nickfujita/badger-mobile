@@ -2,7 +2,7 @@
 
 import React from "react";
 import { SafeAreaView, View, Image } from "react-native";
-import styled from "styled-components";
+import styled from "styled-components/native";
 
 import { T, H1, H2, Spacer, Button } from "../atoms";
 

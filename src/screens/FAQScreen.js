@@ -7,7 +7,7 @@ import {
   Linking,
   TouchableOpacity
 } from "react-native";
-import styled from "styled-components";
+import styled from "styled-components/native";
 
 import { T, Spacer } from "../atoms";
 

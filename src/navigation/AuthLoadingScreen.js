@@ -76,6 +76,7 @@ const AuthLoadingScreen = ({ navigation, mnemonic, getAccount }: Props) => {
       parseError = `Invalid address detected`;
     }
 
+    console.warn("~~~~~~~~SendSetup");
     navigation.navigate("SendSetup", {
       tokenId,
       uriError: parseError,
@@ -94,8 +95,10 @@ const AuthLoadingScreen = ({ navigation, mnemonic, getAccount }: Props) => {
         handleDeepLink(navParams);
         return;
       }
+      console.warn("~~~~~~~~Main");
       navigation.navigate("Main");
     } else {
+      console.warn("~~~~~~~~AuthStack");
       navigation.navigate("AuthStack");
     }
   });

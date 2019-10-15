@@ -1,7 +1,7 @@
 // @flow
 
 import React from "react";
-import { createStackNavigator } from "react-navigation";
+import { createSwitchNavigator } from "react-navigation";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
@@ -24,7 +24,7 @@ import SendStack from "./SendStack";
 
 import { spaceBadger as theme } from "../themes/spaceBadger";
 
-const HomeStack = createStackNavigator(
+const HomeStack = createSwitchNavigator(
   {
     WalletDashboard: {
       screen: HomeScreen,
@@ -35,7 +35,7 @@ const HomeStack = createStackNavigator(
     WalletDetailScreen: {
       screen: WalletDetailScreen,
       navigationOptions: props => {
-        const title = props.navigation.state.params.symbol;
+        const title = "test"; // props.navigation.state.params.symbol;
         return {
           title: `$${title}`
         };
@@ -61,7 +61,7 @@ const HomeStack = createStackNavigator(
   }
 );
 
-const ReceiveStack = createStackNavigator(
+const ReceiveStack = createSwitchNavigator(
   {
     Receive: {
       screen: ReceiveScreen,
@@ -71,7 +71,7 @@ const ReceiveStack = createStackNavigator(
   { headerLayoutPreset: "center" }
 );
 
-const MenuStack = createStackNavigator(
+const MenuStack = createSwitchNavigator(
   {
     Menu: {
       screen: MenuScreen,
@@ -155,7 +155,7 @@ const BottomTabNavigator = createBottomTabNavigator(
   }
 );
 
-const MainAppStack = createStackNavigator(
+const MainAppStack = createSwitchNavigator(
   {
     MainAppTabs: BottomTabNavigator,
     SendStack,

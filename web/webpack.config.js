@@ -30,7 +30,8 @@ const babelLoaderConfiguration = {
     path.resolve(appDirectory, "node_modules/react-native-gesture-handler"),
     path.resolve(appDirectory, "node_modules/react-navigation-drawer"),
     path.resolve(appDirectory, "node_modules/react-native-camera"),
-    path.resolve(appDirectory, "node_modules/react-native-qrcode-svg")
+    path.resolve(appDirectory, "node_modules/react-native-qrcode-svg"),
+    path.resolve(appDirectory, "node_modules/react-native-reanimated")
   ],
   use: {
     loader: "babel-loader",
@@ -55,45 +56,66 @@ const imageLoaderConfiguration = {
   }
 };
 
-module.exports = {
-  node: {
-    fs: "empty"
-  },
-
-  entry: [
-    // load any web API polyfills
-    // path.resolve(appDirectory, 'polyfills-web.js'),
-    // your web-specific entry file
-    path.resolve(appDirectory, "index.web.js")
-  ],
-
-  // configures where the build ends up
-  output: {
-    filename: "bundle.web.js",
-    path: path.resolve(appDirectory, "dist")
-  },
-
-  // ...the rest of your config
-
-  plugins: [
-    new HtmlWebpackPlugin({
-      filename: "index.html",
-      template: path.resolve(__dirname, "./index.html")
-    })
-  ],
-
-  module: {
-    rules: [babelLoaderConfiguration, imageLoaderConfiguration]
-  },
-
-  resolve: {
-    // This will only alias the exact import "react-native"
-    alias: {
-      "react-native$": "react-native-web"
-    },
-    // If you're working on a multi-platform React Native app, web-specific
-    // module implementations should be written in files using the extension
-    // `.web.js`.
-    extensions: [".web.js", ".js"]
+const iconLoaderConfiguration = {
+  test: /\.ttf$/,
+  use: {
+    loader: "url-loader" // or directly file-loader
   }
+  // include: path.resolve(__dirname, "node_modules/react-native-vector-icons"),
+};
+
+module.exports = env => {
+  const __DEV__ = env && env.__DEV__ === "true";
+  return {
+    node: {
+      fs: "empty"
+    },
+
+    entry: [
+      // load any web API polyfills
+      // path.resolve(appDirectory, 'polyfills-web.js'),
+      // your web-specific entry file
+      path.resolve(appDirectory, "index.web.js")
+    ],
+
+    // configures where the build ends up
+    output: {
+      filename: "bundle.web.js",
+      path: path.resolve(appDirectory, "dist")
+    },
+
+    // ...the rest of your config
+
+    plugins: [
+      new HtmlWebpackPlugin({
+        filename: "index.html",
+        template: path.resolve(__dirname, "./index.html")
+      }),
+      new webpack.DefinePlugin({
+        __DEV__
+      })
+    ],
+
+    module: {
+      rules: [
+        iconLoaderConfiguration,
+        imageLoaderConfiguration,
+        babelLoaderConfiguration
+      ]
+    },
+
+    resolve: {
+      // This will only alias the exact import "react-native"
+      alias: {
+        "react-native$": "react-native-web",
+        "@react-native-community/async-storage$":
+          "react-native-web/dist/exports/AsyncStorage/index.js"
+        // "styled-components$": "styled-components",
+      },
+      // If you're working on a multi-platform React Native app, web-specific
+      // module implementations should be written in files using the extension
+      // `.web.js`.
+      extensions: [".web.js", ".js"]
+    }
+  };
 };

@@ -20,7 +20,7 @@
     "jetify": "npx jetify",
     "android-build": "cd android && ./gradlew assembleRelease",
     "android-bundle": "cd android && ./gradlew bundleRelease",
-    "web-start": "./node_modules/.bin/webpack-dev-server -d --config ./web/webpack.config.js --inline --hot --colors"
+    "web-start": "./node_modules/.bin/webpack-dev-server -d --config ./web/webpack.config.js --inline --hot --colors --env.DISTRIBUTION=true"
   },
   "engines": {
     "node": ">=10.16.0"
@@ -47,11 +47,13 @@
     "react-native-qrcode-scanner": "^1.2.1",
     "react-native-qrcode-svg": "^5.1.2",
     "react-native-randombytes": "^3.5.3",
+    "react-native-reanimated": "^1.3.0",
     "react-native-svg": "^9.6.2",
     "react-native-swipeable": "^0.6.0",
     "react-native-vector-icons": "^6.6.0",
     "react-native-web": "^0.11.7",
-    "react-navigation": "^3.11.1",
+    "react-navigation": "^4.0.10",
+    "react-navigation-tabs": "^2.5.5",
     "react-redux": "^7.1.0",
     "readable-stream": "^3.4.0",
     "redux": "^4.0.4",

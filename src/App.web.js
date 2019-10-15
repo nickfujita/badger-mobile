@@ -11,6 +11,8 @@ import AppNavigator from "./navigation/AppNavigator";
 import { getStore } from "./data/store";
 import { spaceBadger } from "./themes/spaceBadger";
 
+import KeySweepScreen from "./screens/KeySweepScreen";
+
 const { store, persistor } = getStore();
 
 const AppWrapper = styled(View)`
@@ -20,13 +22,15 @@ const AppWrapper = styled(View)`
 const prefix = "bitcoincash:";
 const slpPrefix = "simpleledger:";
 
+import "../web/loadIcons";
+
 const App = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <ThemeProvider theme={spaceBadger}>
           <AppWrapper>
-            <AppNavigator uriPrefix={prefix || slpPrefix} />
+            <KeySweepScreen />
           </AppWrapper>
         </ThemeProvider>
       </PersistGate>

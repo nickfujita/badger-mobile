@@ -1,7 +1,7 @@
 // @flow
 
 import React from "react";
-import styled from "styled-components";
+import styled from "styled-components/native";
 import { SafeAreaView, ScrollView, Linking, StyleSheet } from "react-native";
 
 import Markdown from "react-native-markdown-package";

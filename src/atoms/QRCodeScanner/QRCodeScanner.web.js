@@ -1,23 +1,24 @@
-import * as React from "react";
+import React, { Component } from "react";
+import { View } from "react-native";
 import Instascan from "instascan";
 import styled from "styled-components";
 
-const ScannerContainer = styled.div`
+const ScannerContainer = styled(View)`
   width: 82%;
   border-radius: 1rem;
   margin: auto;
   overflow: hidden;
 `;
 
-const ScannerPreview = styled.video`
-  width: 82%;
-  border-radius: 1rem;
-  margin: auto;
-  overflow: hidden;
-`;
+// const ScannerPreview = styled.video`
+//   width: 82%;
+//   border-radius: 1rem;
+//   margin: auto;
+//   overflow: hidden;
+// `;
 
-export default class QRCodeScanner extends React.Component {
-  scanPreviewElement: HTMLVideoElement;
+export default class QRCodeScanner extends Component {
+  scanPreviewElement;
   state = {
     scannerInstance: null
   };
@@ -53,7 +54,7 @@ export default class QRCodeScanner extends React.Component {
   render() {
     return (
       <ScannerContainer>
-        <ScannerPreview ref={ref => (this.scanPreviewElement = ref)} />
+        <video ref={ref => (this.scanPreviewElement = ref)} />
       </ScannerContainer>
     );
   }
